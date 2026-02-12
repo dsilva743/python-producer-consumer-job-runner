@@ -166,7 +166,7 @@ class Worker:
 
     # ---------- retry wrapper ----------
 
-    def _execute_with_retry(self, job: Job):
+    def _execute_with_retry(self, job: Job) -> None:
 
         # mark running once per job lifecycle
         with self.status_lock:
@@ -211,7 +211,7 @@ def create_files(
     file_count: int = 50,
     lines_per_file: int = 20_000,
     producer_delay: tuple[float, float] = (0.05, 0.12),
-):
+) -> None:
     for i in range(file_count):
         path = os.path.join(out_dir, f"file_{i}.txt")
 
@@ -231,7 +231,7 @@ def create_files(
 # Metrics Monitor Thread
 # =========================
 
-def metrics_loop(worker, job_queue, interval=2.0):
+def metrics_loop(worker, job_queue, interval=2.0) -> None:
     last_completed = 0
     last_time = time.time()
 
